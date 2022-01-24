@@ -1,0 +1,139 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Genres_Subgenres Table</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Genres_Subgenres Datatable
+                    </div>
+                    <[notification]>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Genre</th>
+                                        <th>Subgenre</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <[foreach]>
+                                    <tr class="odd gradeX" id="<[id]>">
+                                        <td><[genre]></td>
+                                        <td><[subgenre]></td>
+                                        <td><a href="#panel-heading"><i class="icon-edit"></i></a> <a href="#"><i class="icon-remove"></i></a></td>
+                                    </tr>
+                                    <[/foreach]>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="panel-heading">
+                        Basic Form Elements
+                    </div>
+                    <div class="panel-body">
+                        <form action="../php/business/genres_subgenres/_saveGenre_Subgenre.php" method="post">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="form-group col-lg-2">
+                                        <label>Id</label>
+                                        <input class="form-control" id="editId" type="text" name="id" readonly required>
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Genre</label>
+                                        <select class="form-control" id="editGenre" name="genre" required>
+                                            <[foreach]>
+                                            <option><[getGenre]></option>
+                                            <[/foreach]>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Subgenre</label>
+                                        <select class="form-control" id="editSubgenre" name="subgenre" required>
+                                            <[foreach]>
+                                            <option><[getSubgenre]></option>
+                                            <[/foreach]>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        <button type="submit" class="btn btn-primary form-control">Save Genre_Subgenre</button>
+                                        <button type="reset" class="btn btn-default form-control">Reset Fields</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </form>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+ <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+    });
+</script>
+
+<!--remove genre_subgenre script-->
+<script>
+    $(".icon-remove").each(function(i, obj){
+        $(this).on("click", function(){
+            let id = $(this).closest("tr").attr("id");
+
+            $.post("../php/business/genres_subgenres/_removeGenre_Subgenre.php", {id: id}, function(){
+                                                window.location = "genres_subgenresTable.php";
+                }
+            )
+        })
+        
+
+    })
+</script>
+
+<!--update genre_subgenre script-->
+<script>
+$(".icon-edit").each(function(i, obj){
+    $(this).on("click", function(){
+        let id = $(this).closest("tr").attr("id");
+
+        $.get("../php/business/genres_subgenres/_getGenre_Subgenre.php",
+              {id: id},
+              function(data){
+
+                jsonData = JSON.parse(data);
+
+                $("#editId").val(jsonData.id);
+                $("#editGenre").val(jsonData.genre);
+                $("#editSubgenre").val(jsonData.subgenre);
+              }
+        )
+    })
+    
+
+})
+</script>

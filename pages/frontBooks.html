@@ -1,0 +1,176 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Books Table</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Books Datatable
+                    </div>
+                    <[notification]>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Publisher</th>
+                                            <th>Genre</th>
+                                            <th>Subgenre</th>
+                                            <th>Price</th>
+                                            <th>Scount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <[foreach]>
+                                            <tr class="odd gradeX" id="<[id]>" isbn="<[isbn]>">
+                                                <td>
+                                                    <[title]>
+                                                </td>
+                                                <td>
+                                                    <[author]>
+                                                </td>
+                                                <td>
+                                                    <[publisher]>
+                                                </td>
+                                                <td class="center">
+                                                    <[genre]>
+                                                </td>
+                                                <td class="center">
+                                                    <[subgenre]>
+                                                </td>
+                                                <td>
+                                                    <[price]>&euro;</td>
+                                                <td>
+                                                    <[scount]> %</td>
+                                                <td><a href="#panel-heading"><i class="fa fa-plus"></i></a></td>
+                                            </tr>
+                                            <[/foreach]>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="panel-heading">
+                        Front Books Datatable
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example2">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Publisher</th>
+                                        <th>Genre</th>
+                                        <th>Subgenre</th>
+                                        <th>Price</th>
+                                        <th>Scount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <[foreach]>
+                                        <tr class="odd gradeX" id="<[idFront]>">
+                                            <td>
+                                                <[titleFront]>
+                                            </td>
+                                            <td>
+                                                <[authorFront]>
+                                            </td>
+                                            <td>
+                                                <[publisherFront]>
+                                            </td>
+                                            <td class="center">
+                                                <[genreFront]>
+                                            </td>
+                                            <td class="center">
+                                                <[subgenreFront]>
+                                            </td>
+                                            <td>
+                                                <[priceFront]>&euro;</td>
+                                            <td>
+                                                <[scountFront]> %</td>
+                                            <td><a href="#panel-heading"><i class="icon-remove"></i></a></td>
+                                        </tr>
+                                        <[/foreach]>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example2').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+<!--add to BestedBooks script-->
+<script>
+    $(".fa-plus").each(function(i, obj) {
+        $(this).on("click", function() {
+            let isbn = $(this).closest("tr").attr("isbn");
+
+            $.post("../php/business/frontBooks/_addFrontBook.php", {
+                isbn: isbn
+            }, function() {
+                window.location = "frontBooks.php";
+            })
+        })
+
+
+    })
+</script>
+
+
+<!--remove book script-->
+<script>
+    $(".icon-remove").each(function(i, obj) {
+        $(this).on("click", function() {
+            let id = $(this).closest("tr").attr("id");
+
+            $.post("../php/business/frontBooks/_removeFrontBook.php", {
+                id: id
+            }, function() {
+                window.location = "frontBooks.php";
+            })
+        })
+
+
+    })
+</script>

@@ -1,0 +1,124 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Groups Table</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Groups Datatable
+                    </div>
+                    <[notification]>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <[foreach]>
+                                    <tr class="odd gradeX" id="<[id]>">
+                                        <td><[name]></td>
+                                        <td><a href="#panel-heading"><i class="icon-edit"></i></a> <a href="#"><i class="icon-remove"></i></a></td>
+                                    </tr>
+                                    <[/foreach]>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="panel-heading">
+                        Basic Form Elements
+                    </div>
+                    <div class="panel-body">
+                        <form action="../php/business/groups/_saveGroup.php" method="post">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="form-group col-lg-2">
+                                        <label>Id</label>
+                                        <input class="form-control" id="editId" type="text" name="id" readonly required>
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        <label>Name</label>
+                                        <input class="form-control" id="editName" type="text" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        <button type="submit" class="btn btn-primary form-control">Save Group</button>
+                                        <button type="reset" class="btn btn-default form-control">Reset Fields</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </form>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+ <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+    });
+</script>
+
+<!--remove genre script-->
+<script>
+    $(".icon-remove").each(function(i, obj){
+        $(this).on("click", function(){
+            let id = $(this).closest("tr").attr("id");
+
+            $.post("../php/business/groups/_removeGroup.php", {id: id}, function(){
+                                                window.location = "groupsTable.php";
+                }
+            )
+        })
+        
+
+    })
+</script>
+
+<!--update genre script-->
+<script>
+$(".icon-edit").each(function(i, obj){
+    $(this).on("click", function(){
+        let id = $(this).closest("tr").attr("id");
+
+        $.get("../php/business/groups/_getGroup.php",
+              {id: id},
+              function(data){
+
+                jsonData = JSON.parse(data);
+
+                $("#editId").val(jsonData.id);
+                $("#editName").val(jsonData.name);
+              }
+        )
+    })
+    
+
+})
+</script>

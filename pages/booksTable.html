@@ -1,0 +1,267 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Books Table</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Books Datatable
+                    </div>
+                    <[notification]>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Publisher</th>
+                                            <th>Genre</th>
+                                            <th>Subgenre</th>
+                                            <th>Price</th>
+                                            <th>Scount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <[foreach]>
+                                            <tr class="odd gradeX" id="<[id]>">
+                                                <td>
+                                                    <[title]>
+                                                </td>
+                                                <td>
+                                                    <[author]>
+                                                </td>
+                                                <td>
+                                                    <[publisher]>
+                                                </td>
+                                                <td class="center">
+                                                    <[genre]>
+                                                </td>
+                                                <td class="center">
+                                                    <[subgenre]>
+                                                </td>
+                                                <td>
+                                                    <[price]>&euro;</td>
+                                                <td>
+                                                    <[scount]> %</td>
+                                                <td><a href="#panel-heading"><i class="icon-edit"></i></a> <a href="#"><i class="icon-remove"></i></a></td>
+                                            </tr>
+                                            <[/foreach]>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="panel-heading">
+                        Basic Form Elements
+                    </div>
+                    <div class="panel-body">
+                        <form action="../php/business/books/_saveBook.php" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="form-group col-lg-1">
+                                        <label>Id</label>
+                                        <input class="form-control" id="editId" type="text" name="id" value="" readonly>
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        <label>Isbn</label>
+                                        <input class="form-control" id="editIsbn" type="text" name="isbn" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label>Title</label>
+                                        <input class="form-control" id="editTitle" type="text" name="title" required>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Author</label>
+                                        <select class="form-control" id="editAuthor" name="author" required>
+                                            <[foreach]>
+                                            <option><[authors]></option>
+                                            <[/foreach]>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        <label>Description</label>
+                                        <textarea class="form-control" id="editDescription" rows="3" name="description"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label>Genre</label>
+                                        <select class="form-control" id="editGenre" name="genre" required>
+                                            <[foreach]>
+                                            <option><[genres]></option>
+                                            <[/foreach]>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Subgenre</label>
+                                        <select class="form-control" id="editSubgenre" name="subgenre" required>
+                                            <[foreach]>
+                                            <option><[subgenres]></option>
+                                            <[/foreach]>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label>Publisher</label>
+                                        <select class="form-control" id="editPublisher" name="publisher" required>
+                                                <[foreach]>
+                                                <option><[publishers]></option>
+                                                <[/foreach]>
+                                            </select>
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Year</label>
+                                        <input class="form-control" id="editYear" type="number" name="year" required>
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Pages</label>
+                                        <input class="form-control" id="editPages" type="number" name="pages" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label>Image</label>
+                                    <img src="" id="image" heigh="100" width="100">
+                                    <input class="form-control" id="editImage" type="file" name="image" accept="image/png, image/jpeg" required>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <label>Price</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="editPrice" type="text" name="price" required>
+                                        <span class="input-group-addon"><i class="fa fa-eur"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <div class="input-group">
+                                        <label>Scount</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="editScount" type="text" name="scount">
+                                            <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        <button type="submit" class="btn btn-primary form-control">Save Book</button>
+                                        <button type="reset" class="btn btn-default form-control">Reset Fields</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </form>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+<!--tiny mce-->
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+        toolbar_mode: 'floating',
+    });
+</script>
+
+<!--remove book script-->
+<script>
+    $(".icon-remove").each(function(i, obj) {
+        $(this).on("click", function() {
+            let id = $(this).closest("tr").attr("id");
+
+            $.post("../php/business/books/_removeBook.php", {
+                id: id
+            }, function() {
+                window.location = "booksTable.php";
+            })
+        })
+
+
+    })
+</script>
+<!--image of the book-->
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#editImage").change(function() {
+        readURL(this);
+    });
+
+    $(".icon-edit").each(function(i, obj) {
+        $(this).on("click", function() {
+            let id = $(this).closest("tr").attr("id");
+
+            $.get("../php/business/books/_getBook.php", {
+                    id: id
+                },
+                function(data) {
+
+                    jsonData = JSON.parse(data);
+
+                    $("#editId").val(jsonData.id);
+                    $("#editIsbn").val(jsonData.isbn);
+                    $("#editTitle").val(jsonData.title);
+                    $("#editAuthor").val(jsonData.author);
+                    $("#editDescription").val(jsonData.description);
+                    tinyMCE.activeEditor.setContent(jsonData.description);
+                    $("#editgenre").val(jsonData.genre);
+                    $("#editSubgenre").val(jsonData.subgenre);
+                    $("#editPublisher").val(jsonData.publisher);
+                    $("#editYear").val(jsonData.year);
+                    $("#editPages").val(jsonData.pages);
+                    $("#editMimeType").val(jsonData.mime_type);
+                    $("#editPrice").val(jsonData.price);
+                    $("#editScount").val(jsonData.scount);
+                }
+            )
+        })
+
+
+    })
+</script>
